@@ -74,7 +74,7 @@ class TodoList extends Component {
                         <input ref={(a) => this._inputElement = a}
                             placeholder="Enter Todos!">
                         </input>
-                        <button type="submit">Add</button>
+                        <button type="submit">SUBMIT</button>
                     </form>
                 </div>
                 <TodoItems entries={this.state.items}
