@@ -16,7 +16,7 @@
 }
 
     .todoListMain .header button:hover {
-        background-color: #FFF;
+        background-color: #ff0000;
         border: 2px solid #000000;
         cursor: pointer;
     }
@@ -59,6 +59,3 @@ input[type = "checkbox"] {
     right: 450px;
 }
 
-const completedStyle {
-    textDecoration: "line-through";
-}
