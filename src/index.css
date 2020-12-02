@@ -15,23 +15,3 @@ body {
     color: #000000;
     font-family: serif;
 }
-
-@media(min-width:401px) {
-    body {
-        padding: 5px;
-        background-color: #00FFFF;
-        font-family: 'Courier New';
-    }
-
-    #container {
-        display: flex;
-        justify-content: center;
-    }
-
-    .header {
-        font-size: 20px;
-        text-align: center;
-        color: #000000;
-        font-family: serif;
-    }
-}
