@@ -3,87 +3,92 @@ import TodoItems from "./TodoItems";
 import "./TodoList.css";
 
 class TodoList extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            items: getls || []
-        };
-
-        this.addItem = this.addItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
-        this.checkedItem = this.checkedItem.bind(this);
+    this.state = {
+      items: getls || [],
     };
 
-    functionToSetLocalStorage() {
-        console.log(this.state.items);
-    }
+    this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
+    this.checkedItem = this.checkedItem.bind(this);
+  }
 
-    addItem(e) {
-        if (this._inputElement.value !== "") {
+  functionToSetLocalStorage() {
+    // console.log(this.state.items);
+  }
 
-            var newItem = {
-                text: this._inputElement.value,
-                key: Date.now()
-            }
+  addItem(e) {
+    if (this._inputElement.value !== "") {
+      var newItem = {
+        text: this._inputElement.value,
+        key: Date.now(),
+      };
 
-            this.setState((prevState) => {
-
-                localStorage.setItem('todoEntries', JSON.stringify(prevState.items.concat(newItem)));
-
-                return {
-                    items: prevState.items.concat(newItem)
-                }
-            }, this.functionToSetLocalStorage);
-
-            this._inputElement.value = "";
-        }
-
-        e.preventDefault();
-
-    }
-
-    deleteItem(key) {
-        var filteredItems = this.state.items.filter(function (item) {
-            return (item.key !== key);
-        });
-        localStorage.setItem('todoEntries', JSON.stringify(filteredItems));
-        this.setState({
-            items: filteredItems
-        }, this.functionToSetLocalStorage)
-    }
-    checkedItem() {
-        function strikeThrough(text) {
-            return text
-                .split("")
-                .map(char => char + "\u0336")
-                .join("")
-        }
-        return strikeThrough(this.state.items);
-    }
-    handleChange = () => {
-        console.log(this.state.items);
-    }
-
-    render() {
-        return (
-            <div className="todoListMain">
-                <div className="header">
-                    <form onSubmit={this.addItem}>
-                        <input ref={(a) => this._inputElement = a}
-                            placeholder="Enter Todos!">
-                        </input>
-                        <button type="submit">Go</button>
-                    </form>
-                </div>
-                <TodoItems entries={this.state.items}
-                    delete={this.deleteItem} />
-            </div>
+      this.setState((prevState) => {
+        localStorage.setItem(
+          "todoEntries",
+          JSON.stringify(prevState.items.concat(newItem))
         );
+
+        return {
+          items: prevState.items.concat(newItem),
+        };
+      }, this.functionToSetLocalStorage);
+
+      this._inputElement.value = "";
     }
-};
 
-let getls = JSON.parse(localStorage.getItem('todoEntries'));
+    e.preventDefault();
+  }
 
-export default TodoList;  
+  deleteItem(key) {
+    var filteredItems = this.state.items.filter(function (item) {
+      return item.key !== key;
+    });
+    localStorage.setItem("todoEntries", JSON.stringify(filteredItems));
+    this.setState(
+      {
+        items: filteredItems,
+      },
+      this.functionToSetLocalStorage
+    );
+  }
+
+  checkedItem() {
+    function strikeThrough(text) {
+      return text
+        .split("")
+        .map((char) => char + "\u0336")
+        .join("");
+    }
+    return strikeThrough(this.state.items);
+  }
+
+  handleChange = () => {
+    // console.log(this.state.items);
+  };
+
+  render() {
+    return (
+      <div className="todoListMain">
+        <div className="header">
+          <form onSubmit={this.addItem}>
+            <input
+              ref={(a) => (this._inputElement = a)}
+              placeholder="Enter Todos!"
+              className="col-12"
+            ></input>
+            <button type="submit">Go</button>
+          </form>
+        </div>
+        <TodoItems entries={this.state.items} delete={this.deleteItem} />
+      </div>
+    );
+  }
+}
+
+let getls = JSON.parse(localStorage.getItem("todoEntries"));
+
+export default TodoList;
